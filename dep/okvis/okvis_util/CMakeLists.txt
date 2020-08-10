@@ -4,6 +4,9 @@ project(okvis_util)
 # nothing to build for now...
 add_library(${PROJECT_NAME} STATIC src/dependency-tracker.cc)
 
+target_include_directories(okvis_util
+  INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}/include")
+
 # installation if required
 install(TARGETS ${PROJECT_NAME}
   EXPORT okvisTargets 

@@ -31,6 +31,7 @@ target_link_libraries(${PROJECT_NAME}
   PUBLIC okvis_time 
   PUBLIC okvis_cv)
 
+
 # installation if required
 install(TARGETS ${PROJECT_NAME}
   EXPORT okvisTargets 
