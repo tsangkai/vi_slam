@@ -4,15 +4,21 @@ project(okvis_kinematics)
 
 # require Eigen3
 find_package( Eigen REQUIRED )
-include_directories(${EIGEN_INCLUDE_DIR}) 
 
 # build the library
 add_library(${PROJECT_NAME} STATIC src/dependency-tracker.cc)
 
-# and link it                     
-target_link_libraries(${PROJECT_NAME} 
-  PUBLIC okvis_util
-)
+
+target_include_directories(okvis_kinematics
+  PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/include"
+  PRIVATE okvis_util
+  PRIVATE Eigen)
+
+target_include_directories(okvis_kinematics
+  INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}/include")
+
+
+
 
 # installation if required
 install(TARGETS ${PROJECT_NAME}

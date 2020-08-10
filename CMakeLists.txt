@@ -12,8 +12,8 @@ option (BUILD_APPS
         "Builds a demo app (which requires boost)" ON) 
 option (BUILD_TESTS
         "Builds all gtests" OFF) 
-        
-SET(N_CORES 3 CACHE STRING "Using N number of cores for parallel build")
+
+set(N_CORES 3 CACHE STRING "Using N number of cores for parallel build")
 
 # Make relative paths absolute (needed later on)
 foreach(p LIB BIN INCLUDE CMAKE)
