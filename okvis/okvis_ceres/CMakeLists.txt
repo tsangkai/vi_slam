@@ -2,11 +2,11 @@ cmake_minimum_required(VERSION 2.8.11)
 project(okvis_ceres)
 
 # require Eigen
-find_package( Eigen REQUIRED )
-include_directories(${EIGEN_INCLUDE_DIR}) 
+# find_package( Eigen REQUIRED )
+# include_directories(${EIGEN_INCLUDE_DIR}) 
                
 # build the library 
-add_library(${PROJECT_NAME} 
+add_library(okvis_ceres 
   src/PoseParameterBlock.cpp
   src/SpeedAndBiasParameterBlock.cpp
   src/HomogeneousPointParameterBlock.cpp
@@ -26,14 +26,23 @@ add_library(${PROJECT_NAME}
   include/okvis/ceres/CeresIterationCallback.hpp
 )
 
+target_include_directories(okvis_ceres
+  PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/include"
+  PRIVATE Eigen3)
+
+target_include_directories(okvis_ceres
+  INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}/include")
+
 # and link it
-target_link_libraries(${PROJECT_NAME} 
+target_link_libraries(okvis_ceres 
   PUBLIC okvis_util
   PUBLIC okvis_cv 
   PUBLIC okvis_common
   PRIVATE ${CERES_LIBRARIES} 
   PRIVATE ${OpenCV_LIBRARIES} 
 )
+
+###
 
 # installation if required
 install(TARGETS ${PROJECT_NAME}

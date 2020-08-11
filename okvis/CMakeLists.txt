@@ -2,20 +2,14 @@
 # BUILD LOCAL DEPENDENCIES
 
 add_subdirectory(okvis_util)
-
 add_subdirectory(okvis_kinematics)
-
 add_subdirectory(okvis_time)
-
-include_directories(okvis_cv/include)
 add_subdirectory(okvis_cv)
-add_dependencies(okvis_cv brisk okvis_util)
-
 add_subdirectory(okvis_common)
 
-include_directories(okvis_ceres/include)
+# include_directories(okvis_ceres/include)
 add_subdirectory(okvis_ceres)
-add_dependencies(okvis_ceres ceres okvis_util)
+# add_dependencies(okvis_ceres ceres okvis_util)
 
 add_subdirectory(okvis_timing)
 
