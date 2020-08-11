@@ -3,8 +3,6 @@ cmake_minimum_required(VERSION 3.8)
 # set the project name
 project(vi_slam)
 
-# options for build configuration
-
 
 # option (BUILD_APPS
 #        "Builds a demo app (which requires boost)" ON) 

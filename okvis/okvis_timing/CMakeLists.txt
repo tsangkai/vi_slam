@@ -6,6 +6,14 @@ add_library(${PROJECT_NAME}
   src/NsecTimeUtilities.cpp
 )
 
+target_include_directories(okvis_timing
+  PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/include"
+  PRIVATE okvis_util
+)
+
+target_include_directories(okvis_timing
+  INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}/include")
+
 target_link_libraries(${PROJECT_NAME} PUBLIC okvis_util)
 
 # installation if required

@@ -17,7 +17,6 @@ include_directories(okvis_ceres/include)
 add_subdirectory(okvis_ceres)
 add_dependencies(okvis_ceres ceres okvis_util)
 
-include_directories(okvis_timing/include)
 add_subdirectory(okvis_timing)
 
 include_directories(okvis_matcher/include)
