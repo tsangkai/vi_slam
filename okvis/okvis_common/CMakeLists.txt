@@ -17,6 +17,7 @@ add_library(okvis_common STATIC
   include/okvis/VioParametersReader.hpp)
 
 target_include_directories(okvis_common
+  PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/include"
   PRIVATE Eigen3)
 
 target_include_directories(okvis_common

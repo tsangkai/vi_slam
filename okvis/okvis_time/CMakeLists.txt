@@ -8,8 +8,10 @@ add_library(okvis_time
   src/Duration.cpp)
 
 target_include_directories(okvis_time
-  PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/include"
-  PRIVATE okvis_util)
+  PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/include")
 
 target_include_directories(okvis_time
   INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}/include")
+
+target_link_libraries(okvis_time
+  PUBLIC okvis_util)
