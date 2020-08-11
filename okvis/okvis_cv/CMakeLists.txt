@@ -9,13 +9,9 @@ add_library(okvis_cv STATIC
 )
 
 target_include_directories(okvis_cv
-  PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/include"
+  PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/include"
   PRIVATE Eigen3
   PRIVATE OpenCV
-)
-
-target_include_directories(okvis_cv
-  INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}/include"
 )
 
 # and link it

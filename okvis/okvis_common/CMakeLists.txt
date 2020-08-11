@@ -17,12 +17,8 @@ add_library(okvis_common STATIC
 )
 
 target_include_directories(okvis_common
-  PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/include"
+  PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/include"
   PRIVATE Eigen3
-)
-
-target_include_directories(okvis_common
-  INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}/include"
 )
 
 # and link it                     

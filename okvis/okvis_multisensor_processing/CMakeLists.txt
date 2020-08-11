@@ -27,14 +27,10 @@ add_library(okvis_multisensor_processing
 )
 
 target_include_directories(okvis_multisensor_processing
-  PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/include"
+  PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/include"
   PRIVATE Eigen3
   PRIVATE OpenCV
   PRIVATE Glog
-)
-
-target_include_directories(okvis_multisensor_processing
-  INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}/include"
 )
 
 # and link it                     

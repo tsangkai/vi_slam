@@ -13,11 +13,7 @@ add_library(okvis_matcher
 )
 
 target_include_directories(okvis_matcher
-  PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/include"
-)
-
-target_include_directories(okvis_matcher
-  INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}/include"
+  PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/include"
 )
 
 # and link it

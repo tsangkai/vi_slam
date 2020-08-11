@@ -27,12 +27,8 @@ add_library(okvis_frontend
 )
 
 target_include_directories(okvis_frontend
-  PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/include"
+  PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/include"
   PRIVATE Eigen3
-)
-
-target_include_directories(okvis_frontend
-  INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}/include"
 )
 
 # and link it                 
