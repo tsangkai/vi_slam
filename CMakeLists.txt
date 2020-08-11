@@ -5,10 +5,12 @@ project(vi_slam)
 
 # options for build configuration
 
+
 # option (BUILD_APPS
 #        "Builds a demo app (which requires boost)" ON) 
 # option (BUILD_TESTS
 #        "Builds all gtests" OFF) 
+
 
 set(N_CORES 3 CACHE STRING "Using N number of cores for parallel build")
 

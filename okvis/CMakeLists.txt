@@ -1,11 +1,9 @@
 
 # BUILD LOCAL DEPENDENCIES
-include_directories(okvis_util/include)
+
 add_subdirectory(okvis_util)
 
-include_directories(okvis_kinematics/include)
 add_subdirectory(okvis_kinematics)
-add_dependencies(okvis_kinematics okvis_util)
 
 include_directories(okvis_time/include)
 add_subdirectory(okvis_time)
