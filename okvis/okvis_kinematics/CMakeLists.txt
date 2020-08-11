@@ -3,19 +3,20 @@ cmake_minimum_required(VERSION 2.8.11)
 project(okvis_kinematics)
 
 # build the library
-add_library(${PROJECT_NAME} STATIC src/dependency-tracker.cc)
+add_library(okvis_kinematics INTERFACE)
 
 target_include_directories(okvis_kinematics
-  PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/include"
-  PRIVATE okvis_util
-  PRIVATE Eigen3)
+  INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}/include"
+  INTERFACE okvis_util
+  INTERFACE Eigen3)
 
 target_include_directories(okvis_kinematics
   INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}/include")
 
+target_link_libraries(okvis_kinematics
+  INTERFACE okvis_util)
 
-
-
+###
 # installation if required
 install(TARGETS ${PROJECT_NAME}
   EXPORT okvisTargets 

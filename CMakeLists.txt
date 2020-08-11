@@ -4,8 +4,8 @@ cmake_minimum_required(VERSION 3.8)
 project(vi_slam)
 
 
-# option (BUILD_APPS
-#        "Builds a demo app (which requires boost)" ON) 
+option (BUILD_APPS
+  "Builds a demo app (which requires boost)" ON) 
 # option (BUILD_TESTS
 #        "Builds all gtests" OFF) 
 
@@ -45,7 +45,7 @@ link_directories(${CMAKE_BINARY_DIR}/lib)
 
 # Eigen
 find_package(Eigen3 REQUIRED)
-include_directories(${EIGEN3_INCLUDE_DIR}) 
+include_directories(${EIGEN3_INCLUDE_DIR})   # supposed to be global
 
 # libvisensor
 find_package(VISensor)

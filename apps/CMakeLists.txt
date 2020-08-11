@@ -19,3 +19,4 @@ target_link_libraries(okvis_app_synchronous
   Boost::filesystem
   Boost::system
   )
+
