@@ -25,10 +25,12 @@ add_library(okvis_ceres
 
 target_include_directories(okvis_ceres
   PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/include"
-  PRIVATE Eigen3)
+  PRIVATE Eigen3
+)
 
 target_include_directories(okvis_ceres
-  INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}/include")
+  INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}/include"
+)
 
 # and link it
 target_link_libraries(okvis_ceres 
@@ -36,7 +38,7 @@ target_link_libraries(okvis_ceres
   PUBLIC okvis_cv 
   PUBLIC okvis_common
   PRIVATE ceres
-  PRIVATE ${OpenCV_LIBRARIES} 
+  PRIVATE opengv
 )
 
 ###

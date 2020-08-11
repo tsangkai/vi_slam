@@ -2,10 +2,6 @@ cmake_minimum_required(VERSION 2.8.11)
 
 project(okvis_cv)
 
-# require OpenCV
-find_package( OpenCV COMPONENTS core highgui imgproc features2d REQUIRED )
-include_directories(BEFORE ${OpenCV_INCLUDE_DIRS}) 
-
 # build the library
 add_library(okvis_cv STATIC 
   src/CameraBase.cpp
@@ -14,18 +10,22 @@ add_library(okvis_cv STATIC
 
 target_include_directories(okvis_cv
   PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/include"
-  PRIVATE Eigen3)
+  PRIVATE Eigen3
+  PRIVATE OpenCV
+)
 
 target_include_directories(okvis_cv
-  INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}/include")
+  INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}/include"
+)
 
 # and link it
 target_link_libraries(okvis_cv
   PUBLIC okvis_util
   PUBLIC okvis_kinematics 
   PUBLIC okvis_time
-  PUBLIC brisk
-  PRIVATE ${OpenCV_LIBRARIES})
+  PRIVATE brisk
+  PRIVATE opengv
+)
 
 
 ###

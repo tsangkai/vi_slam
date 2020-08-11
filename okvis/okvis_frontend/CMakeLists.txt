@@ -1,4 +1,5 @@
 cmake_minimum_required(VERSION 2.8.11)
+
 project(okvis_frontend)
 
 if(NOT DO_TIMING)
@@ -6,12 +7,8 @@ if(NOT DO_TIMING)
   message(STATUS "Deactivating timers.")
 endif()    
 
-# require Eigen
-find_package( Eigen REQUIRED )
-include_directories(${EIGEN_INCLUDE_DIR}) 
-
 # build the library
-add_library(${PROJECT_NAME} 
+add_library(okvis_frontend
   src/Frontend.cpp
   src/VioKeyframeWindowMatchingAlgorithm.cpp
   src/stereo_triangulation.cpp
@@ -26,18 +23,31 @@ add_library(${PROJECT_NAME}
   include/opengv/relative_pose/FrameRelativeAdapter.hpp
   include/opengv/sac_problems/absolute_pose/FrameAbsolutePoseSacProblem.hpp
   include/opengv/sac_problems/relative_pose/FrameRelativePoseSacProblem.hpp
-  include/opengv/sac_problems/relative_pose/FrameRotationOnlySacProblem.hpp)
+  include/opengv/sac_problems/relative_pose/FrameRotationOnlySacProblem.hpp
+)
+
+target_include_directories(okvis_frontend
+  PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/include"
+  PRIVATE Eigen3
+)
+
+target_include_directories(okvis_frontend
+  INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}/include"
+)
 
 # and link it                 
-target_link_libraries(${PROJECT_NAME}
-  PRIVATE ${BRISK_LIBRARIES} 
-  PRIVATE ${OpenGV_LIBRARIES} 
-  PRIVATE ${CERES_LIBRARIES}
+target_link_libraries(okvis_frontend
   PUBLIC okvis_util
   PUBLIC okvis_cv 
   PUBLIC okvis_ceres 
   PUBLIC okvis_timing 
-  PUBLIC okvis_matcher)
+  PUBLIC okvis_matcher
+  PRIVATE brisk
+  PRIVATE opengv
+  PRIVATE ceres
+)
+
+###
 
 # installation if required
 install(TARGETS ${PROJECT_NAME}

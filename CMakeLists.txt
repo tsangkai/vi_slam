@@ -113,6 +113,9 @@ set_target_properties(opengv PROPERTIES IMPORTED_LOCATION ${CMAKE_BINARY_DIR}/li
 add_dependencies(${OpenGV_LIBRARIES} opengv_external)
 
 
+find_package( OpenCV COMPONENTS core highgui imgproc features2d REQUIRED )
+include_directories(BEFORE ${OpenCV_INCLUDE_DIRS}) 
+
 add_subdirectory(okvis)
 
 add_subdirectory(apps)

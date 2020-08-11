@@ -1,4 +1,5 @@
 cmake_minimum_required(VERSION 2.8.11)
+
 project(okvis_multisensor_processing)
 
 if(NOT DO_TIMING)
@@ -11,7 +12,7 @@ configure_file(../cmake/okvisConfig.hpp.in "${CMAKE_CURRENT_BINARY_DIR}/okvisCon
 message(STATUS ${CMAKE_CURRENT_BINARY_DIR}/okvisConfig.hpp)
 
 
-add_library(${PROJECT_NAME}
+add_library(okvis_multisensor_processing
   src/ThreadedKFVio.cpp
   src/ImuFrameSynchronizer.cpp
   src/FrameSynchronizer.cpp
@@ -26,12 +27,18 @@ add_library(${PROJECT_NAME}
 )
 
 target_include_directories(okvis_multisensor_processing
+  PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/include"
   PRIVATE Eigen3
   PRIVATE OpenCV
-  PRIVATE Glog)
+  PRIVATE Glog
+)
+
+target_include_directories(okvis_multisensor_processing
+  INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}/include"
+)
 
 # and link it                     
-target_link_libraries(${PROJECT_NAME}
+target_link_libraries(okvis_multisensor_processing
    PUBLIC okvis_time
    PUBLIC okvis_util
    PUBLIC okvis_kinematics 
@@ -44,6 +51,8 @@ target_link_libraries(${PROJECT_NAME}
 
 # export config
 set_target_properties(${PROJECT_NAME} PROPERTIES PUBLIC_HEADER ${CMAKE_CURRENT_BINARY_DIR}/okvisConfig.hpp)
+
+###
 
 # installation if required
 install(TARGETS ${PROJECT_NAME}

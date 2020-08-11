@@ -1,5 +1,4 @@
 
-# BUILD LOCAL DEPENDENCIES
 
 add_subdirectory(okvis_util)
 add_subdirectory(okvis_kinematics)
@@ -9,11 +8,5 @@ add_subdirectory(okvis_common)
 add_subdirectory(okvis_ceres)
 add_subdirectory(okvis_timing)
 add_subdirectory(okvis_matcher)
-
-include_directories(okvis_frontend/include)
 add_subdirectory(okvis_frontend)
-add_dependencies(okvis_frontend opengv okvis_util)
-
-include_directories(okvis_multisensor_processing/include)
 add_subdirectory(okvis_multisensor_processing)
-add_dependencies(okvis_multisensor_processing okvis_util)

@@ -8,13 +8,16 @@ add_library(okvis_kinematics INTERFACE)
 target_include_directories(okvis_kinematics
   INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}/include"
   INTERFACE okvis_util
-  INTERFACE Eigen3)
+  INTERFACE Eigen3
+)
 
 target_include_directories(okvis_kinematics
-  INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}/include")
+  INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}/include"
+)
 
 target_link_libraries(okvis_kinematics
-  INTERFACE okvis_util)
+  INTERFACE okvis_util
+)
 
 ###
 # installation if required

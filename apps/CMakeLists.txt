@@ -18,5 +18,5 @@ target_link_libraries(okvis_app_synchronous
   pthread 
   Boost::filesystem
   Boost::system
-  )
+)
 

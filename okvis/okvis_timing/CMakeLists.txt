@@ -1,7 +1,8 @@
 cmake_minimum_required(VERSION 2.8.11)
+
 project(okvis_timing)
 
-add_library(${PROJECT_NAME}
+add_library(okvis_timing
   src/Timer.cpp
   src/NsecTimeUtilities.cpp
 )
@@ -12,9 +13,12 @@ target_include_directories(okvis_timing
 )
 
 target_include_directories(okvis_timing
-  INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}/include")
+  INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}/include"
+)
 
-target_link_libraries(${PROJECT_NAME} PUBLIC okvis_util)
+target_link_libraries(okvis_timing 
+  PUBLIC okvis_util
+)
 
 # installation if required
 install(TARGETS ${PROJECT_NAME}

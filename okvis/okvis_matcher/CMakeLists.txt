@@ -17,7 +17,8 @@ target_include_directories(okvis_matcher
 )
 
 target_include_directories(okvis_matcher
-  INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}/include")
+  INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}/include"
+)
 
 # and link it
 target_link_libraries(okvis_matcher
