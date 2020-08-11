@@ -1,8 +1,9 @@
 cmake_minimum_required(VERSION 2.8.3)
+
 project(okvis_matcher)
 
 # build the library 
-add_library(${PROJECT_NAME}
+add_library(okvis_matcher
   src/DenseMatcher.cpp
   src/MatchingAlgorithm.cpp
   src/ThreadPool.cpp
@@ -11,10 +12,19 @@ add_library(${PROJECT_NAME}
   include/okvis/ThreadPool.hpp
 )
 
+target_include_directories(okvis_matcher
+  PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/include"
+)
+
+target_include_directories(okvis_matcher
+  INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}/include")
+
 # and link it
-target_link_libraries(${PROJECT_NAME} 
+target_link_libraries(okvis_matcher
   PUBLIC okvis_util 
 )
+
+###
 
 # installation if required
 install(TARGETS ${PROJECT_NAME}

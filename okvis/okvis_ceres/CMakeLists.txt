@@ -1,9 +1,6 @@
 cmake_minimum_required(VERSION 2.8.11)
-project(okvis_ceres)
 
-# require Eigen
-# find_package( Eigen REQUIRED )
-# include_directories(${EIGEN_INCLUDE_DIR}) 
+project(okvis_ceres)
                
 # build the library 
 add_library(okvis_ceres 
@@ -38,7 +35,7 @@ target_link_libraries(okvis_ceres
   PUBLIC okvis_util
   PUBLIC okvis_cv 
   PUBLIC okvis_common
-  PRIVATE ${CERES_LIBRARIES} 
+  PRIVATE ceres
   PRIVATE ${OpenCV_LIBRARIES} 
 )
 
