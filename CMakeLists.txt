@@ -4,14 +4,11 @@ cmake_minimum_required(VERSION 3.8)
 project(vi_slam)
 
 # options for build configuration
-option (USE_SYSTEM_BRISK
-        "Use brisk via find_package rather than downloading it as part of okvis" OFF) 
-option (USE_SYSTEM_CERES
-        "Use ceres via find_package rather than downloading it as part of okvis" OFF) 
-option (BUILD_APPS
-        "Builds a demo app (which requires boost)" ON) 
-option (BUILD_TESTS
-        "Builds all gtests" OFF) 
+
+# option (BUILD_APPS
+#        "Builds a demo app (which requires boost)" ON) 
+# option (BUILD_TESTS
+#        "Builds all gtests" OFF) 
 
 set(N_CORES 3 CACHE STRING "Using N number of cores for parallel build")
 
@@ -113,15 +110,6 @@ add_library(opengv STATIC IMPORTED)
 set(OpenGV_LIBRARIES opengv)
 set_target_properties(opengv PROPERTIES IMPORTED_LOCATION ${CMAKE_BINARY_DIR}/lib/libopengv.a)
 add_dependencies(${OpenGV_LIBRARIES} opengv_external)
-
-# install it once built
-install(FILES ${CMAKE_BINARY_DIR}/lib/libopengv.a 
-  DESTINATION ${CMAKE_INSTALL_PREFIX}/lib)
-install(DIRECTORY ${CMAKE_BINARY_DIR}/include/opengv/ 
-  DESTINATION ${CMAKE_INSTALL_PREFIX}/include/opengv/)
-install(DIRECTORY ${CMAKE_BINARY_DIR}/lib/CMake/opengv/
-  DESTINATION ${CMAKE_INSTALL_PREFIX}/lib/CMake/opengv/)
-
 
 
 
