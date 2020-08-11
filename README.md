@@ -11,3 +11,7 @@ cmake ../
 cmake --build .
 ./okvis_test
 ```
+
+### License ###
+
+The 3-clause BSD license (see file LICENSE) applies.
