@@ -126,33 +126,7 @@ install(DIRECTORY ${CMAKE_BINARY_DIR}/lib/CMake/opengv/
 
 
 
-# 
 add_subdirectory(okvis)
-# add_subdirectory(src)
 
-
-
-find_package(Boost COMPONENTS filesystem system REQUIRED)
-include_directories(${Boost_INCLUDE_DIRS}) 
-  add_executable(okvis_app_synchronous okvis_app_synchronous.cpp)
-target_link_libraries(okvis_app_synchronous 
-  okvis_util
-  okvis_kinematics
-  okvis_time
-  okvis_cv 
-  okvis_common
-  okvis_ceres
-  okvis_timing
-  okvis_matcher
-  okvis_frontend 
-  okvis_multisensor_processing
-  pthread 
-  ${Boost_LIBRARIES}
-  )
-install(TARGETS okvis_app_synchronous
-    # IMPORTANT: Add the executable to the "export-set"
-    EXPORT okvisTargets
-    RUNTIME DESTINATION "${INSTALL_BIN_DIR}" COMPONENT bin)
-
-
+add_subdirectory(apps)
 
