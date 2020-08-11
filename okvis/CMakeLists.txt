@@ -1,5 +1,3 @@
-
-
 add_subdirectory(okvis_util)
 add_subdirectory(okvis_kinematics)
 add_subdirectory(okvis_time)
