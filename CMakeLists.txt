@@ -4,15 +4,13 @@ cmake_minimum_required(VERSION 3.8)
 project(vi_slam)
 
 # options for build configuration
-option (USE_SYSTEM_BRISK
-        "Use brisk via find_package rather than downloading it as part of okvis" OFF) 
-option (USE_SYSTEM_CERES
-        "Use ceres via find_package rather than downloading it as part of okvis" OFF) 
-option (BUILD_APPS
-        "Builds a demo app (which requires boost)" ON) 
-option (BUILD_TESTS
-        "Builds all gtests" OFF) 
-SET(N_CORES 3 CACHE STRING "Using N number of cores for parallel build")
+
+# option (BUILD_APPS
+#        "Builds a demo app (which requires boost)" ON) 
+# option (BUILD_TESTS
+#        "Builds all gtests" OFF) 
+
+set(N_CORES 3 CACHE STRING "Using N number of cores for parallel build")
 
 # Make relative paths absolute (needed later on)
 foreach(p LIB BIN INCLUDE CMAKE)
@@ -71,36 +69,10 @@ include_directories(BEFORE ${GLOG_INCLUDE_DIRS})
 
 
 # brisk
-if(${USE_SYSTEM_BRISK})
-  find_package( brisk 2 REQUIRED )
-  include_directories(BEFORE ${BRISK_INCLUDE_DIRS})
-  message(STATUS "Using system brisk. Found at ${BRISK_INCLUDE_DIRS}.")
-else()
-  ExternalProject_Add(brisk_external
-    URL "https://www.doc.ic.ac.uk/~sleutene/software/brisk-2.0.5.zip"    
-    INSTALL_DIR ${CMAKE_BINARY_DIR}
-    CMAKE_ARGS -DCMAKE_INSTALL_PREFIX:PATH=<INSTALL_DIR> -DCMAKE_BUILD_TYPE:STRING=${CMAKE_BUILD_TYPE}
-    PREFIX ${CMAKE_CURRENT_BINARY_DIR}/brisk
-    BUILD_IN_SOURCE 0
-    BUILD_COMMAND make -j${N_CORES}
-    INSTALL_COMMAND make install
-  )
-  add_library(brisk STATIC IMPORTED)
-  add_library(agast STATIC IMPORTED)
-  set(BRISK_LIBRARIES brisk agast)
-  set_target_properties(brisk PROPERTIES IMPORTED_LOCATION ${CMAKE_BINARY_DIR}/lib/libbrisk.a)
-  set_target_properties(agast PROPERTIES IMPORTED_LOCATION ${CMAKE_BINARY_DIR}/lib/libagast.a)
-  add_dependencies(brisk brisk_external)
-  add_dependencies(agast brisk_external)
+find_package( brisk 2 REQUIRED )
+include_directories(BEFORE ${BRISK_INCLUDE_DIRS})
+message(STATUS "Using system brisk. Found at ${BRISK_INCLUDE_DIRS}.")
 
-  # install it once built
-  install(FILES ${CMAKE_BINARY_DIR}/lib/libbrisk.a ${CMAKE_BINARY_DIR}/lib/libagast.a 
-    DESTINATION ${CMAKE_INSTALL_PREFIX}/lib)
-  install(DIRECTORY ${CMAKE_BINARY_DIR}/include/brisk/ 
-    DESTINATION ${CMAKE_INSTALL_PREFIX}/include/brisk/)
-  install(DIRECTORY ${CMAKE_BINARY_DIR}/lib/CMake/brisk/
-    DESTINATION ${CMAKE_INSTALL_PREFIX}/lib/CMake/brisk/)
-endif()
 
 # ceres
 find_package(SuiteSparse REQUIRED QUIET) #will be needed in any case...
@@ -139,24 +111,13 @@ set(OpenGV_LIBRARIES opengv)
 set_target_properties(opengv PROPERTIES IMPORTED_LOCATION ${CMAKE_BINARY_DIR}/lib/libopengv.a)
 add_dependencies(${OpenGV_LIBRARIES} opengv_external)
 
-# install it once built
-install(FILES ${CMAKE_BINARY_DIR}/lib/libopengv.a 
-  DESTINATION ${CMAKE_INSTALL_PREFIX}/lib)
-install(DIRECTORY ${CMAKE_BINARY_DIR}/include/opengv/ 
-  DESTINATION ${CMAKE_INSTALL_PREFIX}/include/opengv/)
-install(DIRECTORY ${CMAKE_BINARY_DIR}/lib/CMake/opengv/
-  DESTINATION ${CMAKE_INSTALL_PREFIX}/lib/CMake/opengv/)
-
-
-
-
-# Boost
-find_package(Boost COMPONENTS filesystem system REQUIRED)
 
 
 add_subdirectory(dep)
 add_subdirectory(apps)
 
 
+add_subdirectory(okvis)
 
+add_subdirectory(apps)
 

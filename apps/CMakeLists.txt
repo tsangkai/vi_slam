@@ -1,6 +1,10 @@
+
+
+find_package(Boost COMPONENTS filesystem system REQUIRED)
+
 add_executable(okvis_app_synchronous okvis_app_synchronous.cpp)
 
-target_link_libraries(okvis_app_synchronous PRIVATE
+target_link_libraries(okvis_app_synchronous
   okvis_util
   okvis_kinematics
   okvis_time
