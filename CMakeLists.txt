@@ -3,13 +3,6 @@ cmake_minimum_required(VERSION 3.8)
 # set the project name
 project(vi_slam)
 
-
-option (BUILD_APPS
-  "Builds a demo app (which requires boost)" ON) 
-# option (BUILD_TESTS
-#        "Builds all gtests" OFF) 
-
-
 set(N_CORES 3 CACHE STRING "Using N number of cores for parallel build")
 
 # Make relative paths absolute (needed later on)
@@ -86,7 +79,7 @@ message(STATUS "Using system Ceres.")
 
 # OpenGV
 set(CMAKE_CXX_FLAGS_WSUPPRESS 
-      "${CMAKE_CXX_FLAGS} -Wno-unused-parameter -Wno-maybe-uninitialized -Wno-sign-compare -Wno-unused-but-set-variable -Wno-unused-variable -Wno-pedantic")
+    "${CMAKE_CXX_FLAGS} -Wno-unused-parameter -Wno-maybe-uninitialized -Wno-sign-compare -Wno-unused-but-set-variable -Wno-unused-variable -Wno-pedantic")
 message(STATUS "NOTE: Suppressing some warnings when compiling OpenGV.")
 ExternalProject_Add(opengv_external
     GIT_REPOSITORY https://github.com/laurentkneip/opengv
@@ -112,13 +105,11 @@ set(OpenGV_LIBRARIES opengv)
 set_target_properties(opengv PROPERTIES IMPORTED_LOCATION ${CMAKE_BINARY_DIR}/lib/libopengv.a)
 add_dependencies(${OpenGV_LIBRARIES} opengv_external)
 
-
 find_package( OpenCV COMPONENTS core highgui imgproc features2d REQUIRED )
 include_directories(BEFORE ${OpenCV_INCLUDE_DIRS}) 
 
+
+# sub-directory
+
 add_subdirectory(okvis)
-
 add_subdirectory(apps)
-
-
-
