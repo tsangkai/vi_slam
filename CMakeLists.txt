@@ -64,14 +64,14 @@ else()
   message(STATUS "libvisensor not found")
 endif()
 
+
 # glog
 find_package(Glog REQUIRED)
 include_directories(BEFORE ${GLOG_INCLUDE_DIRS}) 
 
 
-
 # brisk
-find_package( brisk 2 REQUIRED )
+find_package(brisk 2 REQUIRED)
 include_directories(BEFORE ${BRISK_INCLUDE_DIRS})
 message(STATUS "Using system brisk. Found at ${BRISK_INCLUDE_DIRS}.")
 
@@ -84,6 +84,7 @@ list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake")
 find_package( Ceres 1.9 REQUIRED )
 include_directories(BEFORE ${CERES_INCLUDE_DIRS})
 message(STATUS "Using system Ceres.")
+
 
 # OpenGV
 set(CMAKE_CXX_FLAGS_WSUPPRESS 
@@ -114,12 +115,9 @@ set_target_properties(opengv PROPERTIES IMPORTED_LOCATION ${CMAKE_BINARY_DIR}/li
 add_dependencies(${OpenGV_LIBRARIES} opengv_external)
 
 
-
-add_subdirectory(dep)
-add_subdirectory(apps)
-
-
 add_subdirectory(okvis)
 
 add_subdirectory(apps)
+
+
 

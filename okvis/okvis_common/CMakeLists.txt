@@ -2,17 +2,9 @@ cmake_minimum_required(VERSION 2.8.11)
 
 project(okvis_common)
 
-IF(libvisensor_FOUND)
-  add_definitions(-DHAVE_LIBVISENSOR)
-  MESSAGE(STATUS "Found libvisensor. Setting HAVE_LIBVISENSOR flag.")
-ENDIF()
-
-# require Eigen
-find_package( Eigen REQUIRED )
-include_directories(${EIGEN_INCLUDE_DIR}) 
 
 # build the library
-add_library(${PROJECT_NAME} STATIC 
+add_library(okvis_common STATIC 
   src/VioInterface.cpp
   src/VioParametersReader.cpp
   include/okvis/FrameTypedefs.hpp
@@ -24,17 +16,15 @@ add_library(${PROJECT_NAME} STATIC
   include/okvis/VioInterface.hpp
   include/okvis/VioParametersReader.hpp)
 
+target_include_directories(okvis_common
+  PRIVATE Eigen3)
+
+target_include_directories(okvis_common
+  INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}/include")
+
 # and link it                     
-target_link_libraries(${PROJECT_NAME}
+target_link_libraries(okvis_common
   PUBLIC okvis_util
   PUBLIC okvis_kinematics 
   PUBLIC okvis_time 
   PUBLIC okvis_cv)
-
-
-# installation if required
-install(TARGETS ${PROJECT_NAME}
-  EXPORT okvisTargets 
-  ARCHIVE DESTINATION "${INSTALL_LIB_DIR}" COMPONENT lib
-)
-install(DIRECTORY include/ DESTINATION ${INSTALL_INCLUDE_DIR} COMPONENT dev FILES_MATCHING PATTERN "*.hpp")

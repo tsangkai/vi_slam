@@ -5,15 +5,12 @@ add_subdirectory(okvis_util)
 
 add_subdirectory(okvis_kinematics)
 
-include_directories(okvis_time/include)
 add_subdirectory(okvis_time)
-add_dependencies(okvis_time okvis_util)
 
 include_directories(okvis_cv/include)
 add_subdirectory(okvis_cv)
 add_dependencies(okvis_cv brisk okvis_util)
 
-include_directories(okvis_common/include)
 add_subdirectory(okvis_common)
 
 include_directories(okvis_ceres/include)

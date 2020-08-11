@@ -2,17 +2,13 @@ cmake_minimum_required(VERSION 2.8.11)
 
 project(okvis_kinematics)
 
-# require Eigen3
-find_package( Eigen REQUIRED )
-
 # build the library
 add_library(${PROJECT_NAME} STATIC src/dependency-tracker.cc)
-
 
 target_include_directories(okvis_kinematics
   PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/include"
   PRIVATE okvis_util
-  PRIVATE Eigen)
+  PRIVATE Eigen3)
 
 target_include_directories(okvis_kinematics
   INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}/include")
