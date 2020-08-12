@@ -15,3 +15,7 @@ cmake --build .
 ### License ###
 
 The 3-clause BSD license (see file LICENSE) applies.
+
+### Evaluation ###
+
+- [evo](https://github.com/MichaelGrupp/evo)
