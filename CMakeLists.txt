@@ -3,6 +3,13 @@ cmake_minimum_required(VERSION 3.8)
 # set the project name
 project(vi_slam)
 
+# options for build configuration
+option (USE_SYSTEM_BRISK
+        "Use brisk via find_package rather than downloading it as part of okvis" OFF) 
+option (USE_SYSTEM_CERES
+        "Use ceres via find_package rather than downloading it as part of okvis" OFF) 
+
+
 set(N_CORES 3 CACHE STRING "Using N number of cores for parallel build")
 
 # Make relative paths absolute (needed later on)
@@ -71,10 +78,13 @@ message(STATUS "Using system brisk. Found at ${BRISK_INCLUDE_DIRS}.")
 find_package(SuiteSparse REQUIRED QUIET) #will be needed in any case...
 find_package(CXSparse QUIET) #optional
 
-list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake")
-find_package( Ceres 1.9 REQUIRED )
+find_package(Ceres 1.9 REQUIRED)
 include_directories(BEFORE ${CERES_INCLUDE_DIRS})
 message(STATUS "Using system Ceres.")
+
+
+
+
 
 
 # OpenGV
